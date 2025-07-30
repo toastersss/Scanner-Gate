@@ -1,0 +1,23 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Build EXE with PyInstaller",
+			"command": "pyinstaller",
+			"args": [
+				"--onefile",
+				"--noconsole",
+				"--name",
+				"ScannerGate",
+				"--add-data",
+				"scanner_settings.json;.",
+				"systems/ModernFileManagerUI_pre_iconstesters.py"
+			],
+			"group": "build",
+			"problemMatcher": [
+				"$python"
+			]
+		}
+	]
+}

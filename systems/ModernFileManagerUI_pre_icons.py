@@ -1,5 +1,5 @@
-# Modern UI test version of FileManagerUI
-# This file is a clone of PreviewFileInterface.py for UI experimentation.
+# Modern UI test version of FileManagerUI (pre-symbols version)
+# This file is a copy of ModernFileManagerUI.py before file icon symbol logic was added.
 
 import os
 import sys
@@ -12,7 +12,6 @@ import threading
 from tkinter import filedialog, messagebox
 import ttkbootstrap as tb
 from ttkbootstrap.constants import *
-import win32gui, win32con
 
 class FileInfo:
     def __init__(self, path: str):
@@ -44,8 +43,6 @@ def open_file_with_default_app(filepath: str):
     elif os.name == 'posix':
         subprocess.call(('xdg-open', filepath))
 
-# The rest of the code is copied from PreviewFileInterface.py and will be modernized in the next step.
-
 class FileManagerUI(tk.Tk):
     def __init__(self):
         # Enable high-DPI awareness for crisp rendering (Windows only)
@@ -73,8 +70,9 @@ class FileManagerUI(tk.Tk):
         self.new_files = set()  # Track new files by name
         self.displayed_files = set()  # Track currently displayed files by name
         self.check_admin()
-        if self.settings.get("default_folder"):
-            self.directory = self.settings["default_folder"]
+        default_folder = self.settings.get("default_folder")
+        if default_folder and os.path.isdir(default_folder):
+            self.directory = default_folder
             self.refresh_files()
         else:
             self.select_folder()
@@ -108,85 +106,71 @@ class FileManagerUI(tk.Tk):
             is_admin = False
         if not is_admin:
             if messagebox.askyesno("Administrator Required", "This software should be run as administrator for full access. Relaunch as admin now?"):
-                import sys, os
+                import sys, os, time
                 params = ' '.join([f'"{x}"' for x in sys.argv])
                 try:
-                    ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, params, None, 1)
+                    result = ctypes.windll.shell32.ShellExecuteW(
+                        None, "runas", sys.executable, params, None, 1
+                    )
+                    if int(result) <= 32:
+                        messagebox.showerror("Error", "Failed to relaunch as admin. Please run this program as administrator manually.")
+                        return
                 except Exception as e:
                     messagebox.showerror("Error", f"Failed to relaunch as admin: {e}")
+                    return
+                time.sleep(1)
                 self.destroy()
                 sys.exit()
 
     def create_widgets(self):
-        # Use ttkbootstrap darkly theme
         style = tb.Style("darkly")
         self.configure(bg=style.colors.bg)
-
-        # Main frame
         frame = tb.Frame(self, bootstyle="dark")
-        frame.pack(fill=BOTH, expand=True, padx=20, pady=20)
-
-        # Top bar with folder and settings
+        frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
         topbar = tb.Frame(frame, bootstyle="dark")
-        topbar.pack(fill=X, pady=(0, 10))
+        topbar.pack(fill=tk.X, pady=(0, 10))
         dir_btn = tb.Button(topbar, text="Select Folder", bootstyle="secondary-outline", command=self.select_folder)
-        dir_btn.pack(side=LEFT, padx=(0, 10))
-        self.path_label = tb.Label(topbar, text=self.directory or "No folder selected", bootstyle="inverse", anchor=W)
-        self.path_label.pack(side=LEFT, fill=X, expand=True)
+        dir_btn.pack(side=tk.LEFT, padx=(0, 10))
+        self.path_label = tb.Label(topbar, text=self.directory or "No folder selected", bootstyle="inverse", anchor=tk.W)
+        self.path_label.pack(side=tk.LEFT, fill=tk.X, expand=True)
         self.settings_btn = tb.Button(topbar, text="⚙", width=3, bootstyle="secondary", command=self.open_settings)
-        self.settings_btn.pack(side=RIGHT, padx=(10, 0))
-
-        # Treeview for files
+        self.settings_btn.pack(side=tk.RIGHT, padx=(10, 0))
         tree_frame = tb.Frame(frame, bootstyle="dark")
-        tree_frame.pack(fill=BOTH, expand=True)
-        # Add an icon column to the left
-        self.tree = tb.Treeview(tree_frame, columns=("Icon", "Name", "Last Modified", "Size (KB)"), show="headings", bootstyle="dark")
-        self.tree.heading("Icon", text="")
-        self.tree.column("Icon", width=40, anchor=W, stretch=False)
-        for col in ["Name", "Last Modified", "Size (KB)"]:
+        tree_frame.pack(fill=tk.BOTH, expand=True)
+        self.tree = tb.Treeview(tree_frame, columns=("Name", "Last Modified", "Size (KB)"), show="headings", bootstyle="dark")
+        for col in self.tree["columns"]:
             self.tree.heading(col, text=col)
-            self.tree.column(col, width=220 if col == "Name" else 140, anchor=W)
-        self.tree.pack(fill=BOTH, expand=True, pady=10)
+            self.tree.column(col, width=220 if col == "Name" else 140, anchor=tk.W)
+        self.tree.pack(fill=tk.BOTH, expand=True, pady=10)
         self.tree.bind("<Double-1>", self.preview_file)
         self.tree.bind("<Motion>", self.on_tree_motion)
         self.tree.bind("<Button-1>", self.on_left_click)
         self.menu = None
-        # Further increase row height and font for clarity, and add padding
         style.configure("Treeview", rowheight=44, font=("Segoe UI", 15), padding=8)
         style.configure("Treeview.Heading", font=("Segoe UI", 15, "bold"))
-        # Remove focus border for a cleaner look
         style.map("Treeview", foreground=[('selected', '#fff')], background=[('selected', '#222')])
-
-        # Icon cache for file types
-        self._icon_cache = {}
-        self._icon_default = self._get_file_icon(None)
-
-        # Bottom bar with actions
-        bottombar = tb.Frame(frame, bootstyle="dark")
-        bottombar.pack(fill=X, pady=(10, 0))
-        # Use a more reload-like symbol for refresh (Unicode U+21BB)
-        self.refresh_btn = tb.Button(bottombar, text="\u21bb  Reload", bootstyle="primary", command=self.refresh_files)
-        self.refresh_btn.pack(side=LEFT, padx=5)
-
-        # Style for new files
         self.tree.tag_configure("newfile", foreground="#ff5555", font=("Segoe UI", 10, "bold"))
-
-        # Modern font for all widgets
         default_font = ("Segoe UI", 11)
         style.configure("TLabel", font=default_font)
         style.configure("TButton", font=("Segoe UI", 11, "bold"))
         style.configure("Treeview.Heading", font=("Segoe UI", 11, "bold"))
         style.configure("Treeview", font=default_font)
-
-        # Update path label on folder change
         self.update_path_label = lambda: self.path_label.config(text=self.directory or "No folder selected")
-
+        bottombar = tb.Frame(frame, bootstyle="dark")
+        bottombar.pack(fill=tk.X, pady=(10, 0))
+        self.refresh_btn = tb.Button(bottombar, text="\u21bb  Reload", bootstyle="primary", command=self.refresh_files)
+        self.refresh_btn.pack(side=tk.LEFT, padx=5)
 
     def open_settings(self):
         win = tb.Toplevel(self)
         win.title("Settings")
-        win.geometry("500x250")
-        tb.Label(win, text="Default folder to view on startup:").pack(anchor=W, padx=10, pady=2)
+        # Make settings window 60% of screen width and 50% of screen height
+        sw = self.winfo_screenwidth()
+        sh = self.winfo_screenheight()
+        ww = int(sw * 0.6)
+        wh = int(sh * 0.5)
+        win.geometry(f"{ww}x{wh}")
+        tb.Label(win, text="Default folder to view on startup:").pack(anchor=tk.W, padx=10, pady=2)
         folder_entry = tb.Entry(win, width=60)
         folder_entry.insert(0, self.settings.get("default_folder", ""))
         folder_entry.pack(padx=10)
@@ -195,9 +179,9 @@ class FileManagerUI(tk.Tk):
             if path:
                 folder_entry.delete(0, tk.END)
                 folder_entry.insert(0, path)
-        tb.Button(win, text="Browse", command=browse_folder, bootstyle="secondary").pack(anchor=W, padx=10, pady=2)
+        tb.Button(win, text="Browse", command=browse_folder, bootstyle="secondary").pack(anchor=tk.W, padx=10, pady=2)
 
-        tb.Label(win, text="Default storage location (option 3):").pack(anchor=W, padx=10, pady=2)
+        tb.Label(win, text="Default storage location (option 3):").pack(anchor=tk.W, padx=10, pady=2)
         storage_entry = tb.Entry(win, width=60)
         storage_entry.insert(0, self.settings.get("default_storage", ""))
         storage_entry.pack(padx=10)
@@ -206,9 +190,9 @@ class FileManagerUI(tk.Tk):
             if path:
                 storage_entry.delete(0, tk.END)
                 storage_entry.insert(0, path)
-        tb.Button(win, text="Browse", command=browse_storage, bootstyle="secondary").pack(anchor=W, padx=10, pady=2)
+        tb.Button(win, text="Browse", command=browse_storage, bootstyle="secondary").pack(anchor=tk.W, padx=10, pady=2)
 
-        tb.Label(win, text="Default destination start point:").pack(anchor=W, padx=10, pady=2)
+        tb.Label(win, text="Default destination start point:").pack(anchor=tk.W, padx=10, pady=2)
         dest_entry = tb.Entry(win, width=60)
         dest_entry.insert(0, self.settings.get("default_dest_start", ""))
         dest_entry.pack(padx=10)
@@ -217,7 +201,7 @@ class FileManagerUI(tk.Tk):
             if path:
                 dest_entry.delete(0, tk.END)
                 dest_entry.insert(0, path)
-        tb.Button(win, text="Browse", command=browse_dest, bootstyle="secondary").pack(anchor=W, padx=10, pady=2)
+        tb.Button(win, text="Browse", command=browse_dest, bootstyle="secondary").pack(anchor=tk.W, padx=10, pady=2)
 
         def save_and_close():
             self.settings["default_folder"] = folder_entry.get().strip()
@@ -256,55 +240,9 @@ class FileManagerUI(tk.Tk):
             if file.name in self.new_files:
                 display_name += " [NEW]"
                 tags = ("newfile",)
-            icon = self._get_file_icon(file.path)
-            self.tree.insert("", tk.END, values=("", display_name, file.last_modified.strftime("%Y-%m-%d %H:%M:%S"), file.size // 1024), image=icon, tags=tags)
+            self.tree.insert("", tk.END, values=(display_name, file.last_modified.strftime("%Y-%m-%d %H:%M:%S"), file.size // 1024), tags=tags)
         self.tree.tag_configure("newfile", foreground="#ff5555", font=("Segoe UI", 10, "bold"))
         self.update_path_label()
-
-    def _get_file_icon(self, path):
-        # Only works on Windows
-        if os.name != 'nt':
-            return None
-        import ctypes
-        from PIL import Image, ImageTk
-        SHGFI_ICON = 0x100
-        SHGFI_SMALLICON = 0x1
-        SHGFI_USEFILEATTRIBUTES = 0x10
-        FILE_ATTRIBUTE_NORMAL = 0x80
-        # Use extension as cache key
-        ext = os.path.splitext(path)[1].lower() if path else 'default'
-        if ext in self._icon_cache:
-            return self._icon_cache[ext]
-        # Get icon handle
-        buf = ctypes.create_unicode_buffer(260)
-        if path:
-            ctypes.windll.kernel32.GetShortPathNameW(path, buf, 260)
-            icon_path = buf.value
-        else:
-            icon_path = None
-        shinfo = ctypes.create_string_buffer(352)
-        hicon = ctypes.c_void_p()
-        ret = ctypes.windll.shell32.SHGetFileInfoW(
-            icon_path if icon_path else '',
-            FILE_ATTRIBUTE_NORMAL,
-            shinfo,
-            ctypes.sizeof(shinfo),
-            SHGFI_ICON | SHGFI_SMALLICON | SHGFI_USEFILEATTRIBUTES
-        )
-        if ret:
-            import win32gui, win32con
-            hicon = ctypes.cast(shinfo.raw[0:ctypes.sizeof(ctypes.c_void_p())], ctypes.POINTER(ctypes.c_void_p)).contents.value
-            ico_x = ctypes.windll.GetSystemMetrics(49)
-            ico_y = ctypes.windll.GetSystemMetrics(50)
-            hdc = ctypes.windll.user32.GetDC(0)
-            bmp = Image.new('RGBA', (ico_x, ico_y))
-            hbitmap = bmp.im.id
-            win32gui.DrawIconEx(hdc, 0, 0, hicon, ico_x, ico_y, 0, 0, win32con.DI_NORMAL)
-            icon_img = ImageTk.PhotoImage(bmp)
-            self._icon_cache[ext] = icon_img
-            return icon_img
-        else:
-            return None
 
     def on_left_click(self, event):
         row_id = self.tree.identify_row(event.y)
@@ -344,14 +282,18 @@ class FileManagerUI(tk.Tk):
             return
         rename_win = tb.Toplevel(self)
         rename_win.title("Rename Scan")
-        rename_win.geometry("500x120")
+        # Make rename window 40% of screen width and 30% of screen height
+        sw = self.winfo_screenwidth()
+        sh = self.winfo_screenheight()
+        ww = int(sw * 0.4)
+        wh = int(sh * 0.3)
+        rename_win.geometry(f"{ww}x{wh}")
         tb.Label(rename_win, text="Enter new file name (with extension):").pack(pady=5)
         entry = tb.Entry(rename_win, width=60)
         entry.insert(0, file.name)
         entry.pack(pady=5)
         btn_frame = tb.Frame(rename_win)
         btn_frame.pack(pady=10)
-
         def do_delete():
             new_name = entry.get().strip()
             if not new_name:
@@ -372,7 +314,6 @@ class FileManagerUI(tk.Tk):
                     self.refresh_files()
                 except Exception as e:
                     messagebox.showerror("Error", f"Failed to delete file: {e}")
-
         def do_retain():
             new_name = entry.get().strip()
             if not new_name:
@@ -405,7 +346,6 @@ class FileManagerUI(tk.Tk):
                 messagebox.showwarning("Open Folder", f"Could not open folder: {e}")
             rename_win.destroy()
             self.refresh_files()
-
         def do_storage():
             new_name = entry.get().strip()
             if not new_name:
@@ -447,14 +387,12 @@ class FileManagerUI(tk.Tk):
                 messagebox.showwarning("Open Folder", f"Could not open folder: {e}")
             rename_win.destroy()
             self.refresh_files()
-
-        tb.Button(btn_frame, text="Delete Scan", width=18, command=do_delete, bootstyle="danger").pack(side=LEFT, padx=5)
-        tb.Button(btn_frame, text="Retain Scan", width=18, command=do_retain, bootstyle="success").pack(side=LEFT, padx=5)
-        tb.Button(btn_frame, text="Retain Scan in storage", width=22, command=do_storage, bootstyle="info").pack(side=LEFT, padx=5)
+        tb.Button(btn_frame, text="Delete Scan", width=18, command=do_delete, bootstyle="danger").pack(side=tk.LEFT, padx=5)
+        tb.Button(btn_frame, text="Retain Scan", width=18, command=do_retain, bootstyle="success").pack(side=tk.LEFT, padx=5)
+        tb.Button(btn_frame, text="Retain Scan in storage", width=22, command=do_storage, bootstyle="info").pack(side=tk.LEFT, padx=5)
         rename_win.transient(self)
         rename_win.grab_set()
         rename_win.focus_set()
-
     def menu_delete_file(self):
         file = self.get_selected_file()
         if not file:
@@ -465,11 +403,9 @@ class FileManagerUI(tk.Tk):
                 self.refresh_files()
             except Exception as e:
                 messagebox.showerror("Error", f"Failed to delete file: {e}")
-
     def auto_refresh(self):
         self.refresh_files()
         self.after(5000, self.auto_refresh)
-
     def on_tree_motion(self, event):
         region = self.tree.identify("region", event.x, event.y)
         if region == "cell":
@@ -483,19 +419,16 @@ class FileManagerUI(tk.Tk):
                         if real_name in self.new_files:
                             self.new_files.remove(real_name)
                             self.tree.item(row_id, values=(real_name, values[1], values[2]), tags=())
-
     def get_selected_file(self) -> FileInfo:
         selected = self.tree.selection()
         if not selected:
             return None
         idx = self.tree.index(selected[0])
         return self.files[idx]
-
     def preview_file(self, event=None):
         file = self.get_selected_file()
         if file:
             open_file_with_default_app(file.path)
-
     def rename_file(self):
         file = self.get_selected_file()
         if not file:
@@ -509,7 +442,6 @@ class FileManagerUI(tk.Tk):
                 self.refresh_files()
             except Exception as e:
                 messagebox.showerror("Error", f"Failed to rename file: {e}")
-
     def move_file(self):
         file = self.get_selected_file()
         if not file:
@@ -523,7 +455,15 @@ class FileManagerUI(tk.Tk):
                 self.refresh_files()
             except Exception as e:
                 messagebox.showerror("Error", f"Failed to move file: {e}")
-
 if __name__ == "__main__":
-    app = FileManagerUI()
-    app.mainloop()
+    try:
+        app = FileManagerUI()
+        app.mainloop()
+    except Exception as e:
+        import traceback
+        with open("error_log.txt", "w") as f:
+            traceback.print_exc(file=f)
+        print("An error occurred. See error_log.txt for details.")
+        input("Press Enter to exit...")
+    else:
+        input("Press Enter to exit...")

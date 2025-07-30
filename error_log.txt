@@ -1,0 +1,168 @@
+[STARTUP] Script loaded.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+Traceback (most recent call last):
+  File "c:\Users\heral\OneDrive\Desktop\VS Code\Python\Scanner-Gate\systems\ModernFileManagerUI_pre_iconstesters.py", line 8, in <module>
+    app = FileManagerUI()
+          ^^^^^^^^^^^^^
+NameError: name 'FileManagerUI' is not defined
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+Traceback (most recent call last):
+  File "c:\Users\heral\OneDrive\Desktop\VS Code\Python\Scanner-Gate\systems\ModernFileManagerUI_pre_iconstesters.py", line 8, in <module>
+    app = FileManagerUI()
+          ^^^^^^^^^^^^^
+NameError: name 'FileManagerUI' is not defined
+[STARTUP] Script loaded.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt, trying extension fallback
+Extension icon extracted for: .txt
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Access Database.accdb (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Access Database.accdb, trying extension fallback
+Extension icon extracted for: .accdb
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx, trying extension fallback
+Extension icon extracted for: .xlsx
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt, trying extension fallback
+Extension icon extracted for: .txt
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Access Database.accdb (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Access Database.accdb, trying extension fallback
+Extension icon extracted for: .accdb
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx, trying extension fallback
+Extension icon extracted for: .xlsx
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt, trying extension fallback
+Extension icon extracted for: .txt
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Access Database.accdb (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Access Database.accdb, trying extension fallback
+Extension icon extracted for: .accdb
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx, trying extension fallback
+Extension icon extracted for: .xlsx
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt, trying extension fallback
+Extension icon extracted for: .txt
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Access Database.accdb (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Access Database.accdb, trying extension fallback
+Extension icon extracted for: .accdb
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx, trying extension fallback
+Extension icon extracted for: .xlsx
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt, trying extension fallback
+Extension icon extracted for: .txt
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx, trying extension fallback
+Extension icon extracted for: .xlsx
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt, trying extension fallback
+Extension icon extracted for: .txt
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx, trying extension fallback
+Extension icon extracted for: .xlsx
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt, trying extension fallback
+Extension icon extracted for: .txt
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx, trying extension fallback
+Extension icon extracted for: .xlsx
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\2.txt, trying extension fallback
+Extension icon extracted for: .txt
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/test scans tool folder/scans\New Microsoft Excel Worksheet.xlsx, trying extension fallback
+Extension icon extracted for: .xlsx
+FileManagerUI __init__ completed.
