@@ -12,6 +12,7 @@ import threading
 from tkinter import filedialog, messagebox
 import ttkbootstrap as tb
 from ttkbootstrap.constants import *
+import win32gui, win32con
 
 class FileInfo:
     def __init__(self, path: str):
@@ -47,9 +48,23 @@ def open_file_with_default_app(filepath: str):
 
 class FileManagerUI(tk.Tk):
     def __init__(self):
+        # Enable high-DPI awareness for crisp rendering (Windows only)
+        try:
+            import ctypes
+            ctypes.windll.shcore.SetProcessDpiAwareness(1)
+        except Exception:
+            pass
+
         super().__init__()
         self.title("Scan Destination Manager - Modern UI Test")
-        self.geometry("800x500")
+
+        # Dynamically scale window to monitor size (80% of screen)
+        screen_w = self.winfo_screenwidth()
+        screen_h = self.winfo_screenheight()
+        win_w = int(screen_w * 0.8)
+        win_h = int(screen_h * 0.8)
+        self.geometry(f"{win_w}x{win_h}")
+
         self.directory = ""
         self.files: List[FileInfo] = []
         self.config_path = os.path.join(os.path.dirname(sys.argv[0]), "scanner_settings.json")
@@ -124,8 +139,11 @@ class FileManagerUI(tk.Tk):
         # Treeview for files
         tree_frame = tb.Frame(frame, bootstyle="dark")
         tree_frame.pack(fill=BOTH, expand=True)
-        self.tree = tb.Treeview(tree_frame, columns=("Name", "Last Modified", "Size (KB)"), show="headings", bootstyle="dark")
-        for col in self.tree["columns"]:
+        # Add an icon column to the left
+        self.tree = tb.Treeview(tree_frame, columns=("Icon", "Name", "Last Modified", "Size (KB)"), show="headings", bootstyle="dark")
+        self.tree.heading("Icon", text="")
+        self.tree.column("Icon", width=40, anchor=W, stretch=False)
+        for col in ["Name", "Last Modified", "Size (KB)"]:
             self.tree.heading(col, text=col)
             self.tree.column(col, width=220 if col == "Name" else 140, anchor=W)
         self.tree.pack(fill=BOTH, expand=True, pady=10)
@@ -133,11 +151,21 @@ class FileManagerUI(tk.Tk):
         self.tree.bind("<Motion>", self.on_tree_motion)
         self.tree.bind("<Button-1>", self.on_left_click)
         self.menu = None
+        # Further increase row height and font for clarity, and add padding
+        style.configure("Treeview", rowheight=44, font=("Segoe UI", 15), padding=8)
+        style.configure("Treeview.Heading", font=("Segoe UI", 15, "bold"))
+        # Remove focus border for a cleaner look
+        style.map("Treeview", foreground=[('selected', '#fff')], background=[('selected', '#222')])
+
+        # Icon cache for file types
+        self._icon_cache = {}
+        self._icon_default = self._get_file_icon(None)
 
         # Bottom bar with actions
         bottombar = tb.Frame(frame, bootstyle="dark")
         bottombar.pack(fill=X, pady=(10, 0))
-        self.refresh_btn = tb.Button(bottombar, text="⟳ Refresh", bootstyle="primary", command=self.refresh_files)
+        # Use a more reload-like symbol for refresh (Unicode U+21BB)
+        self.refresh_btn = tb.Button(bottombar, text="\u21bb  Reload", bootstyle="primary", command=self.refresh_files)
         self.refresh_btn.pack(side=LEFT, padx=5)
 
         # Style for new files
@@ -228,9 +256,55 @@ class FileManagerUI(tk.Tk):
             if file.name in self.new_files:
                 display_name += " [NEW]"
                 tags = ("newfile",)
-            self.tree.insert("", tk.END, values=(display_name, file.last_modified.strftime("%Y-%m-%d %H:%M:%S"), file.size // 1024), tags=tags)
+            icon = self._get_file_icon(file.path)
+            self.tree.insert("", tk.END, values=("", display_name, file.last_modified.strftime("%Y-%m-%d %H:%M:%S"), file.size // 1024), image=icon, tags=tags)
         self.tree.tag_configure("newfile", foreground="#ff5555", font=("Segoe UI", 10, "bold"))
         self.update_path_label()
+
+    def _get_file_icon(self, path):
+        # Only works on Windows
+        if os.name != 'nt':
+            return None
+        import ctypes
+        from PIL import Image, ImageTk
+        SHGFI_ICON = 0x100
+        SHGFI_SMALLICON = 0x1
+        SHGFI_USEFILEATTRIBUTES = 0x10
+        FILE_ATTRIBUTE_NORMAL = 0x80
+        # Use extension as cache key
+        ext = os.path.splitext(path)[1].lower() if path else 'default'
+        if ext in self._icon_cache:
+            return self._icon_cache[ext]
+        # Get icon handle
+        buf = ctypes.create_unicode_buffer(260)
+        if path:
+            ctypes.windll.kernel32.GetShortPathNameW(path, buf, 260)
+            icon_path = buf.value
+        else:
+            icon_path = None
+        shinfo = ctypes.create_string_buffer(352)
+        hicon = ctypes.c_void_p()
+        ret = ctypes.windll.shell32.SHGetFileInfoW(
+            icon_path if icon_path else '',
+            FILE_ATTRIBUTE_NORMAL,
+            shinfo,
+            ctypes.sizeof(shinfo),
+            SHGFI_ICON | SHGFI_SMALLICON | SHGFI_USEFILEATTRIBUTES
+        )
+        if ret:
+            import win32gui, win32con
+            hicon = ctypes.cast(shinfo.raw[0:ctypes.sizeof(ctypes.c_void_p())], ctypes.POINTER(ctypes.c_void_p)).contents.value
+            ico_x = ctypes.windll.GetSystemMetrics(49)
+            ico_y = ctypes.windll.GetSystemMetrics(50)
+            hdc = ctypes.windll.user32.GetDC(0)
+            bmp = Image.new('RGBA', (ico_x, ico_y))
+            hbitmap = bmp.im.id
+            win32gui.DrawIconEx(hdc, 0, 0, hicon, ico_x, ico_y, 0, 0, win32con.DI_NORMAL)
+            icon_img = ImageTk.PhotoImage(bmp)
+            self._icon_cache[ext] = icon_img
+            return icon_img
+        else:
+            return None
 
     def on_left_click(self, event):
         row_id = self.tree.identify_row(event.y)
