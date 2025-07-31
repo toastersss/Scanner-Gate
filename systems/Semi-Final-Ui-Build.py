@@ -16,10 +16,11 @@ from typing import List, Dict
 import tkinter as tk
 import json
 import threading
+import requests
+from io import BytesIO
 from tkinter import filedialog, messagebox
 import ttkbootstrap as tb
 from ttkbootstrap.constants import *
-# For icon extraction and logo
 from PIL import Image, ImageTk
 try:
     import win32api
@@ -35,6 +36,28 @@ if sys.platform.startswith('win') and hasattr(sys, 'frozen') == False:
         ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
     except Exception:
         pass
+
+# --- Github logo URLs ---
+GITHUB_LOGO2_URL = "https://raw.githubusercontent.com/toastersss/Scanner-Gate/main/SmallIco.png"  # icon-only
+GITHUB_LOGO_WITH_TEXT_URL = "https://raw.githubusercontent.com/toastersss/Scanner-Gate/main/largeIco.png"  # logo with text
+
+def fetch_logo2_from_github():
+    try:
+        resp = requests.get(GITHUB_LOGO2_URL, timeout=10)
+        resp.raise_for_status()
+        return Image.open(BytesIO(resp.content))
+    except Exception as e:
+        print(f"Failed to fetch logo2 from GitHub: {e}")
+        return None
+
+def fetch_logo_with_text_from_github():
+    try:
+        resp = requests.get(GITHUB_LOGO_WITH_TEXT_URL, timeout=10)
+        resp.raise_for_status()
+        return Image.open(BytesIO(resp.content))
+    except Exception as e:
+        print(f"Failed to fetch logo_with_text from GitHub: {e}")
+        return None
 
 class FileInfo:
     def __init__(self, path: str):
@@ -115,16 +138,25 @@ class FileManagerUI(tk.Tk):
                 log_error(f"DPI awareness error: {e}")
 
             super().__init__()
-            # --- ADDITION: Set app icon to logo 2 ---
-            logo_path = os.path.join(os.path.dirname(sys.argv[0]), "logo.png")
-            if os.path.exists(logo_path):
+            # --- ADDITION: Fetch logo2 from GitHub and use as app icon ---
+            self.logo2_img_pil = fetch_logo2_from_github()
+            self.logo2_img_tk = None
+            if self.logo2_img_pil:
                 try:
-                    self.icon_img = ImageTk.PhotoImage(Image.open(logo_path))
-                    self.iconphoto(False, self.icon_img)
+                    self.logo2_img_tk = ImageTk.PhotoImage(self.logo2_img_pil.resize((32, 32), Image.Resampling.LANCZOS))
+                    self.iconphoto(False, self.logo2_img_tk)
                 except Exception as e:
-                    log_error(f"Failed to set app icon: {e}")
+                    log_error(f"Failed to set app icon from GitHub logo2: {e}")
+            # --- ADDITION: Fetch logo with text for settings ---
+            self.logo_with_text_img_pil = fetch_logo_with_text_from_github()
+            self.logo_with_text_img_tk = None
+            if self.logo_with_text_img_pil:
+                try:
+                    self.logo_with_text_img_tk = ImageTk.PhotoImage(self.logo_with_text_img_pil.resize((280, 80), Image.Resampling.LANCZOS))
+                except Exception as e:
+                    log_error(f"Failed to set logo_with_text for settings: {e}")
 
-            self.title("Scan Destination Manager - Modern UI Test")
+            self.title("Scanner Gate File Manager")
 
             # Dynamically scale window to monitor size (80% of screen)
             screen_w = self.winfo_screenwidth()
@@ -159,9 +191,7 @@ class FileManagerUI(tk.Tk):
                 pass
             self.destroy()
 
-
     def on_left_click(self, event):
-        # If menu is already open, just close it and return (buffer)
         if self.menu:
             self.menu.unpost()
             self.menu = None
@@ -180,34 +210,23 @@ class FileManagerUI(tk.Tk):
                 self.new_files.remove(real_name)
             self.tree.item(row_id, text=real_name, tags=())
 
+        # ----------- MODIFICATION STARTS HERE -------------
+        # Larger font, new order: Process, Edit, Delete, no Cancel
         self.menu = tk.Menu(self, tearoff=0)
-
-        # --- MAKE MENU AND TEXT LARGER ---
-        # Factor for scaling menu font size
-        menu_font_factor = 1.6
-        menu_font = ("Segoe UI", int(12 * menu_font_factor), "bold")
-
-        # --- REORDERED MENU: Process, Edit, Delete ---
+        menu_font = ("Segoe UI", 18, "bold")
         self.menu.add_command(label="Process", command=self.menu_process_file, font=menu_font)
         self.menu.add_command(label="Edit", command=self.menu_edit_file, font=menu_font)
         self.menu.add_command(label="Delete", command=self.menu_delete_file, font=menu_font)
-        # Removed Cancel button as requested
-
-        # Increase menu size visually by adding padding via separator and empty label if desired
-        # self.menu.add_separator()
-        # self.menu.add_command(label=" ", state="disabled")  # Adds space at bottom if needed
+        # ----------- MODIFICATION ENDS HERE ---------------
 
         try:
             self.menu.tk_popup(event.x_root, event.y_root)
-            # --- Fix highlight disappearing by restoring focus/selection ---
             self.tree.focus_set()
             self.tree.selection_set(row_id)
         finally:
             self.menu.grab_release()
             
-
     def destroy(self):
-        # Cancel auto-refresh callback if set
         if hasattr(self, '_auto_refresh_id') and self._auto_refresh_id:
             try:
                 self.after_cancel(self._auto_refresh_id)
@@ -275,11 +294,8 @@ class FileManagerUI(tk.Tk):
         tree_frame = tb.Frame(frame, bootstyle="dark")
         tree_frame.pack(fill=tk.BOTH, expand=True)
 
-        # SCROLLBAR: Add a vertical scrollbar, modern style
         vsb = tb.Scrollbar(tree_frame, orient="vertical", bootstyle="round", command=lambda *args: self.tree.yview(*args))
         vsb.pack(side=tk.RIGHT, fill=tk.Y, padx=2, pady=6)
-
-        # TREEVIEW: Increase rowheight, font, and padding
         self.tree = tb.Treeview(
             tree_frame,
             columns=("Last Modified", "Size (KB)"),
@@ -309,7 +325,7 @@ class FileManagerUI(tk.Tk):
         self.tree.bind("<Double-1>", self.preview_file)
         self.menu = None
 
-    # Enable mousewheel scrolling (Windows/Linux/Mac)
+        # Enable mousewheel scrolling (Windows/Linux/Mac)
         def _on_mousewheel(event):
             if sys.platform == 'darwin':
                 self.tree.yview_scroll(int(-1 * event.delta), "units")
@@ -338,7 +354,11 @@ class FileManagerUI(tk.Tk):
             return
         prev_displayed = self.displayed_files.copy()
         self.files = scan_directory(self.directory)
-        self.files.sort(key=lambda f: f.last_modified, reverse=True)
+        # --- SUBSORT: Newest to oldest, then by name (natural sort) ---
+        def natural_key(s):
+            import re
+            return [int(text) if text.isdigit() else text.lower() for text in re.split('([0-9]+)', s)]
+        self.files.sort(key=lambda f: (-f.last_modified.timestamp(), natural_key(f.name)))
         current_names = set(f.name for f in self.files)
         if not getattr(self, "first_scan_done", False):
             # First scan: do not mark anything as new
@@ -359,8 +379,9 @@ class FileManagerUI(tk.Tk):
             if file.name in self.new_files:
                 display_name += " [NEW]"
                 tags = ("newfile",)
+            # --- FIX: Use original get_file_icon logic for file icons ---
             icon = self.get_file_icon(file.path, is_folder=False)
-            self._tree_icons.append(icon)  # Keep reference
+            self._tree_icons.append(icon)
             size_kb = file.size // 1024
             self.tree.insert(
                 "", tk.END,
@@ -376,18 +397,6 @@ class FileManagerUI(tk.Tk):
         Returns a Tk PhotoImage for the file/folder icon, using pywin32 for Windows shell API.
         Caches by extension or 'folder'.
         """
-        # --- ADDITION: use logo for the app icon ---
-        logo_path = os.path.join(os.path.dirname(sys.argv[0]), "logo.png")
-        if os.path.exists(logo_path):
-            if "logo" not in self.icon_cache:
-                try:
-                    logo_img = Image.open(logo_path).resize((32, 32), Image.ANTIALIAS)
-                    self.icon_cache["logo"] = ImageTk.PhotoImage(logo_img)
-                except Exception as e:
-                    log_error(f"Failed to load logo for get_file_icon: {e}")
-            return self.icon_cache["logo"]
-
-        # --- original logic ---
         if is_folder:
             key = 'folder'
         else:
@@ -524,17 +533,11 @@ class FileManagerUI(tk.Tk):
             win.destroy()
         tb.Button(win, text="Save", command=save_and_close, bootstyle="success").pack(pady=10)
 
-        # --- ADDITIONS: logo 2 and tagline at the bottom of the settings page ---
-        logo_path = os.path.join(os.path.dirname(sys.argv[0]), "logo.png")
-        if os.path.exists(logo_path):
-            try:
-                logo2_img = Image.open(logo_path).resize((100, 100), Image.ANTIALIAS)
-                logo2_img_obj = ImageTk.PhotoImage(logo2_img)
-                logo2_label = tb.Label(win, image=logo2_img_obj)
-                logo2_label.image = logo2_img_obj
-                logo2_label.pack(pady=10)
-            except Exception as e:
-                log_error(f"Failed to show logo in settings: {e}")
+        # --- Show logo with text and tagline at the bottom of the settings page ---
+        if self.logo_with_text_img_tk:
+            logo_with_text_label = tb.Label(win, image=self.logo_with_text_img_tk)
+            logo_with_text_label.image = self.logo_with_text_img_tk
+            logo_with_text_label.pack(pady=10)
 
         tb.Label(win, text="Designed by Torsten Jostad Yemm", font=("Segoe UI", 12, "italic")).pack(pady=(0, 15))
 

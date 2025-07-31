@@ -825,3 +825,312 @@ Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (
 No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
 Extension icon extracted for: .txt
 FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Failed to set app icon from GitHub logo2: module 'PIL.Image' has no attribute 'ANTIALIAS'
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Failed to set app icon from GitHub logo2: module 'PIL.Image' has no attribute 'ANTIALIAS'
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\qsdqdqwqffew - Copy (3).txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\tester 1.txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\tester 1.txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\tester 1.txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\tester 1.txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\tester 1.txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\tester 1.txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+[STARTUP] Script loaded.
+[MAIN] Entered main block.
+[INIT] Entered FileManagerUI.__init__
+FileManagerUI __init__ starting...
+pywin32 available: attempting to show icons.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\tester 1.txt (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\tester 1.txt, trying extension fallback
+Extension icon extracted for: .txt
+FileManagerUI __init__ completed.
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\New WinRAR archive.rar (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\New WinRAR archive.rar, trying extension fallback
+Extension icon extracted for: .rar
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\New Microsoft Excel Worksheet.xlsx (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\New Microsoft Excel Worksheet.xlsx, trying extension fallback
+Extension icon extracted for: .xlsx
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\New Microsoft Access Database.accdb (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\New Microsoft Access Database.accdb, trying extension fallback
+Extension icon extracted for: .accdb
+Extracting icon for: C:/Users/heral/OneDrive/Desktop/scans\New WinRAR ZIP archive.zip (is_folder=False, exists=True)
+No hicon returned for: C:/Users/heral/OneDrive/Desktop/scans\New WinRAR ZIP archive.zip, trying extension fallback
+Extension icon extracted for: .zip
